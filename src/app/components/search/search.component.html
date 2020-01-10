@@ -1,0 +1,26 @@
+<h5>Поиск</h5>
+<br>
+<div class="form-group">
+    <input type="text" id="option" placeholder="   запрос"
+    class="form-control" #option [(ngModel)]="query">
+    <button class="btn btn-default" (click)="Search2()">Поиск</button>
+    <br>
+    <br>
+</div>
+
+
+<div *ngIf="this.found!=null">
+        <div *ngFor="let hit of this.found.hits.hits; index as id">
+        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', id]"  target="_blank"> 
+            <p><b>{{hit._source.Book}}: 
+            "{{hit._source.Chapter}}"</b>
+            </p>
+            </a>
+            <div *ngFor="let text of hit.highlight.Text">
+                <p>{{text}}</p>
+            </div>
+        </ul>
+        </div>
+</div>
+
+    

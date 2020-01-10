@@ -1,0 +1,43 @@
+{
+    "query": {
+        "bool": {
+            "filter": [],
+            "should": [
+                {
+    			"multi_match": {
+        			"query": "Виконт",
+        			
+        			"fields": [
+            		"Text",
+            		"Book",
+            		"Chapter"
+        			]
+    				}
+				},
+				{
+    				"multi_match": {
+        			"query": "Виконт",
+        			"fields": [
+            		"Text",
+		            "Book^5",
+		         	"Chapter^5"
+		        	],
+		        	"type": "phrase",
+		        	"boost": 7
+    			}
+			}
+		]
+	}
+},
+    "highlight": {
+        "pre_tags": [
+            "<b>"
+        ],
+        "post_tags": [
+            "</b>"
+        ],
+        "fields": {
+            "Text": {}
+        }
+    }
+}
