@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Found } from '../../found'
 import {HttpHeaders} from '@angular/common/http';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { HttpServiceService } from 'src/app/http-service.service';
 
 
 
@@ -16,6 +17,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 export class SearchComponent implements OnInit {
 
   found: Found = null;
+  took: Found = null;
   query: string = ""     //Виконт
   str: any;
   book: string;
@@ -29,7 +31,8 @@ export class SearchComponent implements OnInit {
   lib: any;
   
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private svc: HttpServiceService) {
    }
 
   ngOnInit() {   
@@ -50,81 +53,12 @@ export class SearchComponent implements OnInit {
         );
     }
 
-    Search1(){
-      
-      this.http.post('http://localhost:9200/lib/_search', {
-        query: {
-          bool: {
-              filter: [],
-              should: [
-                  {
-            multi_match: {
-                query: this.query,
-                
-                fields: [
-                  "Text",
-                  "Book",
-                  "Chapter"
-                ]
-              }
-          },
-          {
-              multi_match: {
-                query: this.query,
-                fields: [
-                  "Text",
-                  "Book^5",
-                 "Chapter^5"
-                ],
-                type: "phrase",
-                boost: 7
-            }
-        }
-      ]
-    }
-   },
-      // highlight: {
-      //     pre_tags: [
-      //         "<b>"
-      //     ],
-      //     post_tags: [
-      //         "</b>"
-      //     ],
-      //     fields: {
-      //         "Text": {}
-      //     }
-      // }
-     })
-        .subscribe(
-          data =>{
-            const dataStr = JSON.stringify(data);
-            JSON.parse(dataStr, (key, value) => {
-              if (key === 'Book') {
-                this.arr_books.push(value);
-              }
-              if(key === 'Chapter'){
-                this.arr_chapters.push(value);
-              }
-              if(key === 'Text'){
-                this.arr_texts.push(value);
-              }
-              if(key === 'highlight'){
-            //     JSON.parse(value, (key, value) => {
-            //       if (key === 'Text') {
-            //         this.arr_highlights = value;
-            //       }
-            // });
-            // this.arr_highlights = value as string [];
-
-               }
-              
-          })
-        }
-      );
-
+    Search1(){       //work with service
+      this.found = this.svc.getBook(this.query);
+      console.log(this.found);
     }
 
-    Search2(){
+    Search2(){        //work without service
       
       this.http.post('http://localhost:9200/lib/_search', {
         query: {

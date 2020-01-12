@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { TextComponent } from './text/text.component';
 import { from } from 'rxjs';
+import { HttpServiceService } from './http-service.service';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [HttpServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

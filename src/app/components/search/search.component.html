@@ -3,15 +3,15 @@
 <div class="form-group">
     <input type="text" id="option" placeholder="   запрос"
     class="form-control" #option [(ngModel)]="query">
-    <button class="btn btn-default" (click)="Search2()">Поиск</button>
+    <button class="btn btn-default" (click)="Search1()">Поиск</button>
     <br>
     <br>
 </div>
 
 
 <div *ngIf="this.found!=null">
-        <div *ngFor="let hit of this.found.hits.hits; index as id">
-        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', id]"  target="_blank"> 
+        <div *ngFor="let hit of this.found.hits.hits">
+        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', hit._id]"  target="_blank"> 
             <p><b>{{hit._source.Book}}: 
             "{{hit._source.Chapter}}"</b>
             </p>
