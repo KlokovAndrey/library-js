@@ -5,6 +5,7 @@ import { Found } from '../../found'
 import {HttpHeaders} from '@angular/common/http';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { HttpServiceService } from 'src/app/http-service.service';
+  import {Observable} from "rxjs";
 
 
 
@@ -29,18 +30,18 @@ export class SearchComponent implements OnInit {
   arr_texts:string[];
   arr_highlights: string[];
   lib: any;
-  
+
 
   constructor(private http: HttpClient,
     private svc: HttpServiceService) {
    }
 
-  ngOnInit() {   
+  ngOnInit() {
   }
 
     Create(){
       this.http.post('http://localhost:9200/books/_doc', {
-      book: "Ангелы и демоны",  
+      book: "Ангелы и демоны",
       title: '1',
         })
         .subscribe(
@@ -54,12 +55,17 @@ export class SearchComponent implements OnInit {
     }
 
     Search1(){       //work with service
-      this.found = this.svc.getBook(this.query);
+      this.svc.getBook(this.query).subscribe(
+        (data:Found) =>{
+          this.found = data;
+        });
+
+
       console.log(this.found);
     }
 
     Search2(){        //work without service
-      
+
       this.http.post('http://localhost:9200/lib/_search', {
         query: {
           bool: {
@@ -68,7 +74,7 @@ export class SearchComponent implements OnInit {
                   {
             multi_match: {
                 query: this.query,
-                
+
                 fields: [
                   "Text",
                   "Book",
@@ -102,15 +108,10 @@ export class SearchComponent implements OnInit {
               "Text": {}
           }
       }
-     })
-        .subscribe(
-          (data:Found) =>{
-            this.found = data;
-               })
-               console.log(this.found);
-        
+     });
+
           // response => {
-            
+
           //   this.str = response.json();
           //   console.log(this.str);
           // })
@@ -125,7 +126,7 @@ export class SearchComponent implements OnInit {
                   {
             multi_match: {
                 query: this.query,
-                
+
                 fields: [
                   "Text",
                   "Book",
@@ -181,7 +182,7 @@ export class SearchComponent implements OnInit {
             });
 
               }
-              
+
           })
         }
       );
@@ -190,7 +191,7 @@ export class SearchComponent implements OnInit {
 
 
     Test(){
-      
+
       this.http.post('http://jsonplaceholder.typicode.com/posts', {
         title: 'foo',
         body: 'bar',
@@ -208,7 +209,7 @@ export class SearchComponent implements OnInit {
 
 
     submit(){
-      
+
        const contentHeaders1 = new HttpHeaders()
        .set('Content-Type', 'application/json; charset=utf-8')
        .set('Access-Control-Allow-Origin', 'http://localhost:4200')
@@ -228,7 +229,7 @@ console.log("headers ", contentHeaders1.getAll('Access-Control-Allow-Origin'));
                     {
               multi_match: {
                   query: "день рождения",
-                  
+
                   fields: [
                     "Text",
                     "Book",

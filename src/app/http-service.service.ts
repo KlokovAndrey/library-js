@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Found } from './found';
 import { HttpClient } from '@angular/common/http';
-import { stringify } from 'querystring';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpServiceService {
 
-  found: Found = null;
-
   constructor(private http: HttpClient) { }
 
-  getBook(query): Found{
-    this.http.post('http://localhost:9200/lib/_search', {
+  getBook<T>(query): Observable<T>{
+    return this.http.post<T>('http://localhost:9200/lib/_search', {
         query: {
           bool: {
               filter: [],
@@ -21,7 +19,7 @@ export class HttpServiceService {
                   {
             multi_match: {
                 query: query,
-                
+
                 fields: [
                   "Text",
                   "Book",
@@ -56,16 +54,10 @@ export class HttpServiceService {
           }
       }
      })
-        .subscribe(
-          (data:Found) =>{
-            console.log(data);
-            this.found = data;
-               }) 
-               return this.found;
   }
 
-  getText(id): Found{
-    this.http.post('http://localhost:9200/lib/_search', {
+  getText<T>(id): Observable<T>{
+    return this.http.post<T>('http://localhost:9200/lib/_search', {
       query: {
         bool: {
             filter: [],
@@ -103,13 +95,5 @@ export class HttpServiceService {
         }
     }
    })
-      .subscribe(
-        (data:Found) =>{
-          console.log(data);
-          this.found = data;
-          //return data.hits.hits[0]._source.Text;
-          return this.found;
-             })
-             return this.found;
   }
 }

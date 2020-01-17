@@ -9,10 +9,10 @@
 </div>
 
 
-<div *ngIf="this.found!=null">
-        <div *ngFor="let hit of this.found.hits.hits">
-        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', hit._id]"  target="_blank"> 
-            <p><b>{{hit._source.Book}}: 
+<ng-container *ngIf="this.found">
+        <ng-container *ngFor="let hit of this.found.hits.hits">
+        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', hit._id]"  target="_blank">
+            <p><b>{{hit._source.Book}}:
             "{{hit._source.Chapter}}"</b>
             </p>
             </a>
@@ -20,7 +20,6 @@
                 <p>{{text}}</p>
             </div>
         </ul>
-        </div>
-</div>
+        </ng-container>
+</ng-container>
 
-    
