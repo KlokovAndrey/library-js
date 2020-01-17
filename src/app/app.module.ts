@@ -9,10 +9,17 @@ import { SearchComponent } from './components/search/search.component';
 import { TextComponent } from './text/text.component';
 import { from } from 'rxjs';
 import { HttpServiceService } from './http-service.service';
+import { AppAuthGuard } from './app.authguard';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
   {path: 'search', component: SearchComponent},
+  // { 
+  //   path: 'search', 
+  //   loadChildren: () => SearchComponent ,
+  //   canActivate: [AppAuthGuard], 
+  //   data: { roles: ['User'] }
+  //},
   {path: 'text/:id', component: TextComponent} 
 ]
 

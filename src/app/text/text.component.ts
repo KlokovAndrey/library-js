@@ -29,18 +29,17 @@ export class TextComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.found = this.svc.getText(this.id);
-    //this.Search();
-    this.text = this.found.hits.hits[0]._source.Text;
-    console.log(this.text);
+    this.Search();
+    console.log(this.found);
+    
   }
 
   Search(){
-    //this.text = this.svc.getText(this.id);
-
-    this.found = this.svc.getText(this.id);
-    this.text = this.found.hits.hits[0]._source.Text;
-   
+    this.svc.getText<Found>(this.id).subscribe(
+      (data:Found) =>{
+        this.found = data;
+        this.text = this.found.hits.hits[0]._source.Text;
+      });
+ 
     }
-  } 
-}
+  }
