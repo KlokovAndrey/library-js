@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Found } from './found';
+import { Found } from '../found';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
-=======
-import {Observable} from "rxjs";
->>>>>>> bbce2bdb1999964d0323c6ae4dc55885fe300f79
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpServiceService {
 
-<<<<<<< HEAD
   found: Found = null;
   domen: string = 'https://search-elasticsearch-lib-fgzjpurnqqwi4pdizkk7ogcfue.us-east-2.es.amazonaws.com';
 
@@ -25,12 +20,6 @@ export class HttpServiceService {
         "Chapter",
         "Book"
       ],
-=======
-  constructor(private http: HttpClient) { }
-
-  getBook<T>(query): Observable<T>{
-    return this.http.post<T>('http://localhost:9200/lib/_search', {
->>>>>>> bbce2bdb1999964d0323c6ae4dc55885fe300f79
         query: {
           bool: {
               filter: [],
@@ -38,7 +27,7 @@ export class HttpServiceService {
                   {
             multi_match: {
                 query: query,
-
+                
                 fields: [
                   "Text",
                   "Book",
@@ -76,11 +65,7 @@ export class HttpServiceService {
   }
 
   getText<T>(id): Observable<T>{
-<<<<<<< HEAD
     return this.http.post<T>(this.domen+'/lib/_search', {
-=======
-    return this.http.post<T>('http://localhost:9200/lib/_search', {
->>>>>>> bbce2bdb1999964d0323c6ae4dc55885fe300f79
       query: {
         bool: {
             filter: [],

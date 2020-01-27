@@ -1,4 +1,4 @@
-<h5>Поиск</h5>
+<h5>Поиск &nbsp; <a [routerLink]="['/add']">Добавление</a></h5>    
 <br>
 <div class="form-group">
     <input type="text" id="option" placeholder="   запрос"
@@ -16,9 +16,11 @@
             "{{hit._source.Chapter}}"</b>
             </p>
             </a>
-            <div *ngFor="let text of hit.highlight.Text">
-                <p>{{text}}</p>
-            </div>
+            <ng-container *ngIf="hit.highlight!=undefined">
+                <div *ngFor="let text of hit.highlight.Text">
+                    <p class="e2e-inner-html-bound" [innerHTML]="text"></p>
+                </div>
+            </ng-container>
         </ul>
         </ng-container>
 </ng-container>

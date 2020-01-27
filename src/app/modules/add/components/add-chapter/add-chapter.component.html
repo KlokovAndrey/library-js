@@ -1,0 +1,14 @@
+<h5> <a [routerLink]="['/search']">Поиск</a> &nbsp; Добавление главы</h5>
+<br>
+<div class="form-group">
+    <input type="text" id="option" placeholder="   книга"
+    class="form-control" #option [(ngModel)]="book">
+    <button class="btn btn-default" (click)="add()">Добавить</button>
+    <input type="text" id="option1" placeholder="   глава"
+    class="form-control" #option [(ngModel)]="chapter">
+</div>
+<div>
+    <textarea placeholder="   текст главы" #option [(ngModel)]="text"></textarea>
+    <br>
+    <br>
+</div>

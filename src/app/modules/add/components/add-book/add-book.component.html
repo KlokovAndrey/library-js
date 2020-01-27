@@ -1,0 +1,7 @@
+<input type="file" (change)="onChange($event.target.files)">
+
+<div>
+  <h3>File Content</h3>
+  {{fileContent}}
+   <p class="e2e-inner-html-bound" [innerHTML]="fileContent"></p>
+</div>

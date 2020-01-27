@@ -1,41 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router'
  
 import { AppComponent } from './app.component';
-import { SearchComponent } from './components/search/search.component';
-import { TextComponent } from './text/text.component';
-import { from } from 'rxjs';
-import { HttpServiceService } from './http-service.service';
+import { SearchComponent } from './modules/search/components/search/search.component';
+import { HttpServiceService } from './modules/search/services/http-service.service';
 import { AppAuthGuard } from './app.authguard';
+import { ShowChapterComponent } from './modules/search/components/showChapter/showChapter.component';
+import { AddBookComponent } from './modules/add/components/add-book/add-book.component';
+import { AddChapterComponent } from './modules/add/components/add-chapter/add-chapter.component';
+import { HttpService } from './modules/add/services/http.service';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { AppRoutingModule } from './app-routing.module';
+import { initializer } from './app-init';
+import { StartPageComponent } from './modules/start/start-page/start-page.component';
 
-const routes: Routes = [
-  {path: '', component: AppComponent},
-  {path: 'search', component: SearchComponent},
-  // { 
-  //   path: 'search', 
-  //   loadChildren: () => SearchComponent ,
-  //   canActivate: [AppAuthGuard], 
-  //   data: { roles: ['User'] }
-  //},
-  {path: 'text/:id', component: TextComponent} 
-]
+
+const keycloakService = new KeycloakService();
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    TextComponent
+    ShowChapterComponent,
+    AddBookComponent,
+    AddChapterComponent,
+    StartPageComponent
   ],
   imports: [
+    KeycloakAngularModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
-  providers: [HttpServiceService],
+  providers: [HttpServiceService, HttpService, AppAuthGuard, KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
+  //entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
