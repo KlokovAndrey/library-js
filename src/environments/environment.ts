@@ -22,7 +22,8 @@ import { KeycloakConfig } from 'keycloak-angular';
 const keycloakConfig: KeycloakConfig = {
   url: 'http://localhost:8080/auth/',
   realm: 'libapp',
-  clientId: 'lib'
+  clientId: 'lib',
+  credentials: {secret: '52cc9890-bd2c-4e31-8067-f2e57cd04694'}
 };
 
 export const environment = {

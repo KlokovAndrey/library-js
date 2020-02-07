@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
  
 import { AppComponent } from './app.component';
@@ -36,14 +36,13 @@ const keycloakService = new KeycloakService();
     AppRoutingModule
   ],
   providers: [HttpServiceService, HttpService, AppAuthGuard, KeycloakService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializer,
-      multi: true,
-      deps: [KeycloakService]
-    }
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializer,
+    //   multi: true,
+    //   deps: [KeycloakService]
+    // }
   ],
-  //entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

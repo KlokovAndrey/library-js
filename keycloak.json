@@ -1,8 +1,0 @@
-{
-  "realm": "libapp",
-  "auth-server-url": "http://localhost:8080/auth/",
-  "ssl-required": "external",
-  "resource": "lib",
-  "public-client": true,
-  "confidential-port": 0
-}

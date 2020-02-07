@@ -12,6 +12,7 @@ input.form-control[type="text"] {
     color: #111111; /*цвет шрифта в обычном состоянии*/
     font-size: 16px; /* Размер шрифта*/
     font-family: Tahoma; /* Стиль шрифта*/
+    display: inline-block;
  }
 
  button {
@@ -23,6 +24,7 @@ input.form-control[type="text"] {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    display: inline-block;
 }
 
 textarea{
@@ -38,5 +40,6 @@ textarea{
     color: #111111; /*цвет шрифта в обычном состоянии*/
     font-size: 16px; /* Размер шрифта*/
     font-family: Tahoma; /* Стиль шрифта*/
+    display: inline-block;
  }
 

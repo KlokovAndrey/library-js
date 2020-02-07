@@ -1,3 +1,7 @@
-<label>{{this.userDetails.username}}</label>
-<button class="btn btn-default" (click)="doLogout()">Log out</button>
+<a [routerLink]="['search']">Поиск</a> &nbsp; <a [routerLink]="['/add']">Добавление</a>
+<ul *ngIf="this.userDetails!=null">
+    <label>{{this.userDetails.username}}</label>
+    <button class="btn btn-default" (click)="doLogout()">Log out</button>
+</ul>
+
 <router-outlet></router-outlet>

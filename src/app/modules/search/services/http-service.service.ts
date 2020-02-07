@@ -11,11 +11,12 @@ export class HttpServiceService {
 
   found: Found = null;
   domen: string = 'https://search-elasticsearch-lib-fgzjpurnqqwi4pdizkk7ogcfue.us-east-2.es.amazonaws.com';
+  domen1: string = 'http://localhost:9200';
 
   constructor(private http: HttpClient) { }
 
   getBook<T>(query): Observable<T>{
-    return this.http.post<T>(this.domen + '/lib/_search', {
+    return this.http.post<T>(this.domen1 + '/lib/_search', {
       _source: [
         "Chapter",
         "Book"
@@ -65,7 +66,7 @@ export class HttpServiceService {
   }
 
   getText<T>(id): Observable<T>{
-    return this.http.post<T>(this.domen+'/lib/_search', {
+    return this.http.post<T>(this.domen1+'/lib/_search', {
       query: {
         bool: {
             filter: [],

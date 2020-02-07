@@ -8,7 +8,7 @@ import { KeycloakService } from 'keycloak-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  userDetails: KeycloakProfile;
+  userDetails: KeycloakProfile = null;
 
   constructor(private keycloakService: KeycloakService) {}
 

@@ -11,20 +11,20 @@ import { StartPageComponent } from './modules/start/start-page/start-page.compon
 
 const routes: Routes = [
   {path: '', component: StartPageComponent},
-  //{path: 'search', component: SearchComponent},
   {
     path: 'add', 
     component: AddChapterComponent,
     canActivate: [AppAuthGuard],
     data: { roles: ['admin'] }
   },
-  { 
-    path: 'search', 
-    //loadChildren: () => SearchComponent ,
-    component: SearchComponent,
-    canActivate: [AppAuthGuard],
-    data: { roles: ['user', 'admin'] }
-  },
+  {path: 'search', component: SearchComponent},
+  // { 
+  //   path: 'search', 
+  //   //loadChildren: () => SearchComponent ,
+  //   component: SearchComponent,
+  //   canActivate: [AppAuthGuard],
+  //   data: { roles: ['user', 'admin'] }
+  // },
   {path: 'text/:id', component: ShowChapterComponent}
 ];
 

@@ -5,6 +5,8 @@ import { Found } from '../../found'
 import {HttpHeaders} from '@angular/common/http';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { HttpServiceService } from 'src/app/modules/search/services/http-service.service';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile, KeycloakRoles } from 'keycloak-js';
 
 
 
@@ -18,13 +20,24 @@ export class SearchComponent implements OnInit {
 
   found: Found = null;
   query: string = ""     //Виконт
+  // userDetails: KeycloakProfile;
+  // isAdmin: boolean;
+  bearerToken;
+  myHeaders: HttpHeaders;
   
 
   constructor(private http: HttpClient,
-    private svc: HttpServiceService) {
+    private svc: HttpServiceService, private keycloakService:KeycloakService) {
    }
 
-  ngOnInit() {   
+   async ngOnInit() {  
+    if (await this.keycloakService.isLoggedIn()) {
+      this.bearerToken = await this.keycloakService.getToken();
+      console.log(this.bearerToken);
+      //this.userDetails = await this.keycloakService.loadUserProfile();
+      //this.isAdmin = this.keycloakService.isUserInRole('admin');
+    }
+     
   }
 
     Search1(){       //work with service

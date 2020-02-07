@@ -22,3 +22,4 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
     });
   };
 }
+
