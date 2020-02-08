@@ -36,12 +36,12 @@ const keycloakService = new KeycloakService();
     AppRoutingModule
   ],
   providers: [HttpServiceService, HttpService, AppAuthGuard, KeycloakService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializer,
-    //   multi: true,
-    //   deps: [KeycloakService]
-    // }
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }
   ],
   bootstrap: [AppComponent]
 })

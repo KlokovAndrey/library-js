@@ -7,6 +7,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { HttpServiceService } from 'src/app/modules/search/services/http-service.service';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile, KeycloakRoles } from 'keycloak-js';
+import { Hero } from './Hero'
 
 
 
@@ -21,9 +22,10 @@ export class SearchComponent implements OnInit {
   found: Found = null;
   query: string = ""     //Виконт
   // userDetails: KeycloakProfile;
-  // isAdmin: boolean;
+  isAdmin: boolean;
   bearerToken;
   myHeaders: HttpHeaders;
+  hero: Hero = null;
   
 
   constructor(private http: HttpClient,
@@ -35,7 +37,7 @@ export class SearchComponent implements OnInit {
       this.bearerToken = await this.keycloakService.getToken();
       console.log(this.bearerToken);
       //this.userDetails = await this.keycloakService.loadUserProfile();
-      //this.isAdmin = this.keycloakService.isUserInRole('admin');
+      this.isAdmin = this.keycloakService.isUserInRole('admin');
     }
      
   }
@@ -97,6 +99,23 @@ export class SearchComponent implements OnInit {
             this.found = data;
                })
                console.log(this.found);
+    }
+
+    getHeroes (){
+      this.http.get('assets/heroes.json').subscribe((data:Hero) => this.hero=data);
+      console.log(this.hero);
+    }
+
+
+    delete(id){
+      this.svc.deleteChapter(id).subscribe(
+        (data:Found) =>{
+        });
+        //const tmp = this.query;
+        //{window.location.reload();};
+        //this.query = tmp;
+      //this.Search1();
+      
     }
 
 }

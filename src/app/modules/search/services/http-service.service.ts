@@ -16,7 +16,7 @@ export class HttpServiceService {
   constructor(private http: HttpClient) { }
 
   getBook<T>(query): Observable<T>{
-    return this.http.post<T>(this.domen1 + '/lib/_search', {
+    return this.http.post<T>(this.domen + '/lib/_search', {
       _source: [
         "Chapter",
         "Book"
@@ -66,7 +66,7 @@ export class HttpServiceService {
   }
 
   getText<T>(id): Observable<T>{
-    return this.http.post<T>(this.domen1+'/lib/_search', {
+    return this.http.post<T>(this.domen+'/lib/_search', {
       query: {
         bool: {
             filter: [],
@@ -93,5 +93,9 @@ export class HttpServiceService {
   }
  }
    })
+  }
+
+  deleteChapter<T>(id): Observable<T>{
+    return this.http.delete<T>(this.domen + '/lib/_doc/' + id)
   }
 }

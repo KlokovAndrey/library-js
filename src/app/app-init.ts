@@ -13,7 +13,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
             onLoad: 'login-required',
             checkLoginIframe: false
           },
-          bearerExcludedUrls: []
+          bearerExcludedUrls: ['https://search-elasticsearch-lib-fgzjpurnqqwi4pdizkk7ogcfue.us-east-2.es.amazonaws.com']
         });
         resolve();
       } catch (error) {

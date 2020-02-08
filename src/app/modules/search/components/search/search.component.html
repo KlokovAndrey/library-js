@@ -1,20 +1,24 @@
 <br>
 <div class="form-group">
     <input type="text" id="option" placeholder="   запрос"
-    class="form-control" #option [(ngModel)]="query">
-    <button class="btn btn-default" (click)="Search1()">Поиск</button>
+    class="form-control" autocomplete="on" #option [(ngModel)]="query">
+    <button #btn class="btn-default" (click)="Search1()">Поиск</button>
+    
     <br>
     <br>
 </div>
 
-
-<ng-container *ngIf="this.found">
+<ng-container *ngIf="this.found!=null">
         <ng-container *ngFor="let hit of this.found.hits.hits">
-        <ul><a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', hit._id]"  target="_blank">
-            <p><b>{{hit._source.Book}}:
+        <ul><p>
+            <ng-container *ngIf="isAdmin">
+            <button class="btn" (click)="delete(hit._id)"> X </button> &nbsp; 
+        </ng-container>
+            <a [title]="hit._source.Book + ': ' + hit._source.Chapter" [routerLink]="['/text', hit._id]"  target="_blank">
+            <b>{{hit._source.Book}}:
             "{{hit._source.Chapter}}"</b>
-            </p>
             </a>
+        </p>
             <ng-container *ngIf="hit.highlight!=undefined">
                 <div *ngFor="let text of hit.highlight.Text">
                     <p class="e2e-inner-html-bound" [innerHTML]="text"></p>

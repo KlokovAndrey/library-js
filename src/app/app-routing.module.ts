@@ -17,14 +17,15 @@ const routes: Routes = [
     canActivate: [AppAuthGuard],
     data: { roles: ['admin'] }
   },
-  {path: 'search', component: SearchComponent},
-  // { 
-  //   path: 'search', 
-  //   //loadChildren: () => SearchComponent ,
-  //   component: SearchComponent,
-  //   canActivate: [AppAuthGuard],
-  //   data: { roles: ['user', 'admin'] }
-  // },
+  //{path: 'add', component: AddChapterComponent},
+  //{path: 'search', component: SearchComponent},
+  { 
+    path: 'search', 
+    //loadChildren: () => SearchComponent ,
+    component: SearchComponent,
+    canActivate: [AppAuthGuard],
+    data: { roles: ['user', 'admin'] }
+  },
   {path: 'text/:id', component: ShowChapterComponent}
 ];
 
