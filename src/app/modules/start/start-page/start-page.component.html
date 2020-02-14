@@ -1,6 +1,38 @@
-<ul>
-    <h5><a [routerLink]="['/add']">Добавление</a></h5> 
-</ul>
-<ul>
-    <h5> <a [routerLink]="['/search']">Поиск</a></h5>
-</ul>
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Положение фонового рисунка</title>
+  <style>
+    body {
+        background: #494846 url(assets/images/book8.jpg) no-repeat center bottom;  /* Цвет фона и путь к файлу */
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+    <div class="main">
+      <div class="wr">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>    
+        <a class="up" [routerLink]="['search']">НАЙТИ ГЛАВУ</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br> 
+        <a class="up" [routerLink]="['add']">ДОБАВИТЬ ГЛАВУ</a>
+      </div>
+    </div>
+</body>
+</html>

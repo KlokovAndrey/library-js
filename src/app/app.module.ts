@@ -8,7 +8,6 @@ import { SearchComponent } from './modules/search/components/search/search.compo
 import { HttpServiceService } from './modules/search/services/http-service.service';
 import { AppAuthGuard } from './app.authguard';
 import { ShowChapterComponent } from './modules/search/components/showChapter/showChapter.component';
-import { AddBookComponent } from './modules/add/components/add-book/add-book.component';
 import { AddChapterComponent } from './modules/add/components/add-chapter/add-chapter.component';
 import { HttpService } from './modules/add/services/http.service';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
@@ -24,7 +23,6 @@ const keycloakService = new KeycloakService();
     AppComponent,
     SearchComponent,
     ShowChapterComponent,
-    AddBookComponent,
     AddChapterComponent,
     StartPageComponent
   ],

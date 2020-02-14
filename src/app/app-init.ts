@@ -13,7 +13,10 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
             onLoad: 'login-required',
             checkLoginIframe: false
           },
-          bearerExcludedUrls: ['https://search-elasticsearch-lib-fgzjpurnqqwi4pdizkk7ogcfue.us-east-2.es.amazonaws.com']
+          bearerExcludedUrls: [
+            'https://search-elasticsearch-lib-fgzjpurnqqwi4pdizkk7ogcfue.us-east-2.es.amazonaws.com',
+            'localhost:9200'
+          ]
         });
         resolve();
       } catch (error) {

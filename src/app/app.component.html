@@ -1,7 +1,15 @@
-<a [routerLink]="['search']">Поиск</a> &nbsp; <a [routerLink]="['/add']">Добавление</a>
-<ul *ngIf="this.userDetails!=null">
+<div>
+ <div style="float: left; width: 250px; height: 50px; ">
+    &nbsp; <a class="up" [routerLink]="['search']">Поиск</a> 
+    &nbsp; <a class="up" [routerLink]="['/add']">Добавление</a>
+    &nbsp; <a class="up" [routerLink]="['/']">Главная</a>
+ </div>
+<ng-container *ngIf="this.userDetails!=null">
+    <div style="float: right; width: 120px; height: 50px;">
     <label>{{this.userDetails.username}}</label>
     <button class="btn btn-default" (click)="doLogout()">Log out</button>
-</ul>
+    </div>
+</ng-container>
+</div>
 
 <router-outlet></router-outlet>

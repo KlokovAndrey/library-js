@@ -13,3 +13,28 @@ ul {
     font-size: 16px; /* Размер шрифта*/
     font-family: Tahoma; /* Стиль шрифта*/
 }
+
+body, html{
+    width: 100%;
+    height: 100%;
+}
+
+div.main {
+    width: 100w;
+  height: 100vh;
+
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 60px;  
+    font-family: "Garamond" serif;
+    color: black;
+  }
+
+  div.wr {
+    position: relative;
+    left: 40px;
+    top: 80px;
+    width: 550px;
+  }

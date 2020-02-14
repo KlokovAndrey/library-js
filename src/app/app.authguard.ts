@@ -29,6 +29,9 @@ export class AppAuthGuard extends KeycloakAuthGuard {
             break;
           }
         }
+        if(granted === false){
+          await this.keycloakAngular.logout();
+        }
         resolve(granted);
       }
     });
