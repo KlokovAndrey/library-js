@@ -2,7 +2,7 @@
     &nbsp; &nbsp; &nbsp; &nbsp;
     <input type="text" id="option" placeholder="   запрос"
     class="form-control" autocomplete="on" #option [(ngModel)]="query">
-    <button #btn class="btn-default" (click)="Search1()">Поиск</button>
+    <button #btn class="btn-default" (click)="search()">Поиск</button>
     
     <br>
     <br>
@@ -27,4 +27,8 @@
         </ul>
         </ng-container>
 </ng-container>
+
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" 
+[template]="customLoadingTemplate"></ngx-loading>
 

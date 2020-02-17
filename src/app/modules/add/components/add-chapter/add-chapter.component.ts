@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../../services/http.service';
 import { Found } from 'src/app/modules/search/found';
 
 @Component({
@@ -40,10 +40,8 @@ export class AddChapterComponent implements OnInit {
           this.book = "";
           this.chapter = "";
           this.text = "";
+          alert('Глава добавлена');
       });
-
-      
-
       
   }
 

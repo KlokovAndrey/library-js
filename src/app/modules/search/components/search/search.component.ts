@@ -4,10 +4,10 @@ import { HttpClient } from '@angular/common/http'
 import { Found } from '../../found'
 import {HttpHeaders} from '@angular/common/http';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { HttpServiceService } from 'src/app/modules/search/services/http-service.service';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile, KeycloakRoles } from 'keycloak-js';
 import { Hero } from './Hero'
+import { HttpService } from 'src/app/modules/services/http.service';
 
 
 
@@ -20,102 +20,37 @@ import { Hero } from './Hero'
 export class SearchComponent implements OnInit {
 
   found: Found = null;
-  query: string = ""     //Виконт
-  // userDetails: KeycloakProfile;
+  query: string = "";
   isAdmin: boolean;
-  bearerToken;
-  myHeaders: HttpHeaders;
-  hero: Hero = null;
+  loading: boolean = false;
   
 
   constructor(private http: HttpClient,
-    private svc: HttpServiceService, private keycloakService:KeycloakService) {
+    private svc: HttpService, private keycloakService:KeycloakService) {
    }
 
    async ngOnInit() {  
     if (await this.keycloakService.isLoggedIn()) {
-      this.bearerToken = await this.keycloakService.getToken();
-      console.log(this.bearerToken);
-      //this.userDetails = await this.keycloakService.loadUserProfile();
       this.isAdmin = this.keycloakService.isUserInRole('admin');
     }
      
   }
 
-    Search1(){       //work with service
+    search(){       //work with service
+      this.loading = true;
       this.svc.getBook(this.query).subscribe(
         (data:Found) =>{
           this.found = data;
+          this.loading = false;
         });
     }
 
-    Search2(){        //work without service
-      
-      this.http.post('http://localhost:9200/lib/_search', {
-        query: {
-          bool: {
-              filter: [],
-              should: [
-                  {
-            multi_match: {
-                query: this.query,
-                
-                fields: [
-                  "Text",
-                  "Book",
-                  "Chapter"
-                ]
-              }
-          },
-          {
-              multi_match: {
-                query: this.query,
-                fields: [
-                  "Text",
-                  "Book^5",
-                 "Chapter^5"
-                ],
-                type: "phrase",
-                boost: 7
-            }
-        }
-      ]
-    }
-   },
-      highlight: {
-          pre_tags: [
-              "<b>"
-          ],
-          post_tags: [
-              "</b>"
-          ],
-          fields: {
-              "Text": {}
-          }
-      }
-     })
-        .subscribe(
-          (data:Found) =>{
-            this.found = data;
-               })
-               console.log(this.found);
-    }
-
-    getHeroes (){
-      this.http.get('assets/heroes.json').subscribe((data:Hero) => this.hero=data);
-      console.log(this.hero);
-    }
 
 
     delete(id){
       this.svc.deleteChapter(id).subscribe(
         (data:Found) =>{
         });
-        //const tmp = this.query;
-        //{window.location.reload();};
-        //this.query = tmp;
-      //this.Search1();
-      
     }
 
 }
